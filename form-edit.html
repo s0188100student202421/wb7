@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма обратной связи</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form action="/wb6/admin/edit/{{app_id}}" method="POST" class="form">
+      <div>
+        <div class="head">
+          <h2><b>Форма обратной связи</b></h2>
+        </div>
+
+        <!-- скрытое поле для токена, которое подставляется сервером -->
+        <input type="hidden" name="form_token" value="{{form_token}}" />
+
+        <!-- Поле для ФИО с возможной ошибкой -->
+        <div>
+          <label>
+            <input name="fio" class="input" placeholder="ФИО" required value="{{fio}}" />
+          </label>
+          <!-- Ошибка для ФИО, если она есть -->
+          <span class="error" id="error_fio">{{error_fio}}</span>
+        </div>
+
+        <!-- Поле для телефона с возможной ошибкой -->
+        <div>
+          <label>
+            <input type="tel" name="phone" class="input" placeholder="Номер телефона" required value="{{phone}}" />
+          </label>
+          <!-- Ошибка для телефона, если она есть -->
+          <span class="error" id="error_phone">{{error_phone}}</span>
+        </div>
+
+        <!-- Поле для email с возможной ошибкой -->
+        <div>
+          <label>
+            <input name="email" type="email" class="input" placeholder="Почта" required value="{{email}}" />
+          </label>
+          <!-- Ошибка для email, если она есть -->
+          <span class="error" id="error_email">{{error_email}}</span>
+        </div>
+
+        <!-- Поле для даты -->
+        <div>
+          <label>
+            <input name="date" class="input" type="date" value="{{date}}" />
+          </label>
+          <!-- Ошибка для date, если она есть -->
+          <span class="error" id="error_date">{{error_date}}</span>
+        </div>
+
+        <!-- Поля для выбора пола -->
+        <div>
+          <div>Пол</div>
+          <div class="mb-1">
+            <label>
+              <input type="radio" name="gender" value="M" required {{#if gender == 'M'}}checked{{/if}} /> М
+            </label>
+            <label>
+              <input type="radio" name="gender" value="F" required {{#if gender == 'F'}}checked{{/if}} /> Ж
+            </label>
+          </div>
+          <span class="error" id="error_gender">{{error_gender}}</span>
+        </div>
+
+        <!-- Множественный выбор для любимого языка программирования -->
+        <div>
+          <label class="input">
+            <div>Любимый язык программирования</div>
+            <select class="my-2" name="languages" multiple="multiple">
+                <option value="Pascal" {{#if languages contains 'Pascal'}}selected{{/if}}>Pascal</option>
+                <option value="C" {{#if languages contains 'C'}}selected{{/if}}>C</option>
+                <option value="C++" {{#if languages contains 'C++'}}selected{{/if}}>C++</option>
+                <option value="JavaScript" {{#if languages contains 'JavaScript'}}selected{{/if}}>JavaScript</option>
+                <option value="PHP" {{#if languages contains 'PHP'}}selected{{/if}}>PHP</option>
+                <option value="Python" {{#if languages contains 'Python'}}selected{{/if}}>Python</option>
+                <option value="Java" {{#if languages contains 'Java'}}selected{{/if}}>Java</option>
+                <option value="Haskell" {{#if languages contains 'Haskell'}}selected{{/if}}>Haskell</option>
+                <option value="Clojure" {{#if languages contains 'Clojure'}}selected{{/if}}>Clojure</option>
+                <option value="Scala" {{#if languages contains 'Scala'}}selected{{/if}}>Scala</option>
+              </select>
+          </label>
+          <span class="error" id="error_languages">{{error_languages}}</span>
+        </div>
+
+        <!-- Поле для биографии -->
+        <div class="biography">
+          <div>Биография</div>
+          <label>
+            <textarea class="input" name="bio" placeholder="Биография" required>{{bio}}</textarea>
+          </label>
+          <span class="error" id="error_bio">{{error_bio}}</span>
+        </div>
+
+        <!-- Чекбокс для подтверждения -->
+        <div class="form-group informed">
+          <label class="">
+            <label>
+              <input id="informed" type="checkbox" name="check" required {{#if check == 'on'}}checked{{/if}} /> с контрактом ознакомлен(а)
+            </label>
+          </label>
+          <span class="error" id="error_check">{{error_check}}</span>
+        </div>
+
+        <!-- Кнопка отправки формы -->
+        <button type="submit" class="button my-3">Отправить</button>
+      </div>
+    </form>
+  </body>
+</html>
